@@ -1,4 +1,3 @@
-```javascript
 // 1. Data Budaya Nusantara Terstruktur (Komplit)
 const dataNusantara = {
     sumatra: {
