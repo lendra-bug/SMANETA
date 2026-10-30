@@ -1,5 +1,4 @@
-```javascript
-// 1. Data Budaya Nusantara Terstruktur (Komplit)
+// 1. Data Budaya Nusantara Terstruktur (Lokal / Online Hybrid)
 const dataNusantara = {
     sumatra: {
         title: "Kebudayaan Sumatra",
@@ -45,44 +44,95 @@ const dataNusantara = {
     }
 };
 
-// 2. Sistem Animasi Kinerja Tinggi GSAP (Faktor Utama Penilaian Juri)
-document.addEventListener("DOMContentLoaded", () => {
-    gsap.registerPlugin(ScrollTrigger);
+// 2. Manajemen Modals Detail Kebudayaan (DIJAMIN RESPONSIVE)
+const modal = document.getElementById("detailsModal");
+const closeModalBtn = document.getElementById("closeModalBtn");
+const cards = document.querySelectorAll(".card");
 
-    // Animasi Intro Load Beranda
-    gsap.from(".navbar", { y: -100, opacity: 0, duration: 1, ease: "power4.out" });
-    gsap.from(".animated-element", { 
-        y: 40, 
-        opacity: 0, 
-        duration: 1.2, 
-        stagger: 0.2, 
-        ease: "power3.out",
-        delay: 0.3 
-    });
+cards.forEach(card => {
+    card.addEventListener("click", function() {
+        const region = this.getAttribute("data-region");
+        const data = dataNusantara[region];
 
-    // Animasi Scroll Trigger Untuk Card Eksplorasi (Efek Muncul Bertahap)
-    gsap.from(".animated-card", {
-        scrollTrigger: {
-            trigger: "#eksplorasi",
-            start: "top 75%",
-        },
-        y: 60,
-        opacity: 0,
-        duration: 0.8,
-        stagger: 0.15,
-        ease: "power2.out"
+        if (data) {
+            // Isi Konten Modal secara Dinamis
+            document.getElementById("modalTitle").innerText = data.title;
+            document.getElementById("modalTag").innerText = data.tag;
+            document.getElementById("modalImg").style.backgroundImage = `url('${data.image}')`;
+            document.getElementById("modalDescription").innerText = data.desc;
+            document.getElementById("modalFact").innerText = data.fact;
+
+            // Munculkan Modal Utama
+            modal.style.display = "flex";
+
+            // Efek Animasi GSAP Pop-up (Jika GSAP gagal muat, modal tetap muncul aman)
+            if (typeof gsap !== 'undefined') {
+                gsap.fromTo(".modal-wrapper", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.3, ease: "power2.out" });
+            }
+        }
     });
 });
 
-// 3. Logika Navigasi Aktif Otomatis saat Scroll
+// Fungsi Tutup Modal
+const closeModal = () => {
+    if (typeof gsap !== 'undefined') {
+        gsap.to(".modal-wrapper", { scale: 0.8, opacity: 0, duration: 0.2, ease: "power2.in", onComplete: () => {
+            modal.style.display = "none";
+        }});
+    } else {
+        modal.style.display = "none";
+    }
+};
+
+if(closeModalBtn) closeModalBtn.addEventListener("click", closeModal);
+document.querySelector(".modal-backdrop").addEventListener("click", closeModal);
+
+
+// 3. Sistem Animasi GSAP & ScrollTrigger (Visual Ciamik)
+document.addEventListener("DOMContentLoaded", () => {
+    if (typeof gsap !== 'undefined') {
+        // Mendaftarkan plugin jika ScrollTrigger tersedia
+        if (typeof ScrollTrigger !== 'undefined') {
+            gsap.registerPlugin(ScrollTrigger);
+            
+            // Animasi Scroll Trigger Untuk Card Eksplorasi
+            gsap.from(".animated-card", {
+                scrollTrigger: {
+                    trigger: "#eksplorasi",
+                    start: "top 75%",
+                },
+                y: 50,
+                opacity: 0,
+                duration: 0.6,
+                stagger: 0.1,
+                ease: "power2.out"
+            });
+        }
+
+        // Animasi Pembuka Halaman Utama
+        gsap.from(".navbar", { y: -100, opacity: 0, duration: 0.8, ease: "power3.out" });
+        gsap.from(".animated-element", { 
+            y: 30, 
+            opacity: 0, 
+            duration: 1, 
+            stagger: 0.15, 
+            ease: "power3.out",
+            delay: 0.2 
+        });
+    }
+});
+
+// 4. Logika Navigasi Aktif Otomatis saat Scroll (Perbaikan Bug standard Browser)
 const sections = document.querySelectorAll("section");
 const navLinks = document.querySelectorAll(".nav-link");
 
 window.addEventListener("scroll", () => {
     let current = "";
+    const scrollPos = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+
     sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        if (window.pageYOffset >= sectionTop - 150) {
+        if (scrollPos >= sectionTop - 160) {
             current = section.getAttribute("id");
         }
     });
@@ -95,56 +145,26 @@ window.addEventListener("scroll", () => {
     });
 });
 
-// 4. Manajemen Modals Detail Kebudayaan
-const modal = document.getElementById("detailsModal");
-const closeModalBtn = document.getElementById("closeModalBtn");
-const cards = document.querySelectorAll(".card");
-
-cards.forEach(card => {
-    card.addEventListener("click", () => {
-        const region = card.getAttribute("data-region");
-        const data = dataNusantara[region];
-
-        if (data) {
-            document.getElementById("modalTitle").innerText = data.title;
-            document.getElementById("modalTag").innerText = data.tag;
-            document.getElementById("modalImg").style.backgroundImage = `url('${data.image}')`;
-            document.getElementById("modalDescription").innerText = data.desc;
-            document.getElementById("modalFact").innerText = data.fact;
-
-            modal.style.display = "flex";
-            gsap.fromTo(".modal-wrapper", { scale: 0.8, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.4, ease: "back.out(1.5)" });
-        }
-    });
-});
-
-const closeModal = () => {
-    gsap.to(".modal-wrapper", { scale: 0.8, opacity: 0, duration: 0.3, ease: "power2.in", onComplete: () => {
-        modal.style.display = "none";
-    }});
-};
-
-closeModalBtn.addEventListener("click", closeModal);
-document.querySelector(".modal-backdrop").addEventListener("click", closeModal);
-
 // 5. Fitur Audio Latar Kontrol Interaktif
 const audio = document.getElementById("bgMusic");
 const audioBtn = document.getElementById("audioBtn");
 let isPlaying = false;
 
-audioBtn.addEventListener("click", () => {
-    if (!isPlaying) {
-        audio.play().catch(e => console.log("Interaksi user diperlukan untuk memulai musik sesuai regulasi browser modern."));
-        audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-        audioBtn.style.backgroundColor = "#2ecc71";
-        isPlaying = true;
-    } else {
-        audio.pause();
-        audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-        audioBtn.style.backgroundColor = "var(--primary)";
-        isPlaying = false;
-    }
-});
+if(audioBtn) {
+    audioBtn.addEventListener("click", () => {
+        if (!isPlaying) {
+            audio.play().catch(e => console.log("Perlu klik user untuk play musik."));
+            audioBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            audioBtn.style.backgroundColor = "#2ecc71";
+            isPlaying = true;
+        } else {
+            audio.pause();
+            audioBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            audioBtn.style.backgroundColor = "var(--primary)";
+            isPlaying = false;
+        }
+    });
+}
 
 // 6. Sistem Kuis Budaya (Gamifikasi Edukatif)
 const quizData = [
@@ -186,26 +206,3 @@ function showQuestion() {
         const btn = document.createElement("button");
         btn.className = "quiz-opt-btn";
         btn.innerText = opt;
-        btn.onclick = () => selectAnswer(idx);
-        optionsContainer.appendChild(btn);
-    });
-}
-
-function selectAnswer(idx) {
-    if (idx === quizData[currentQuestion].correct) {
-        score++;
-    }
-    
-    currentQuestion++;
-    if (currentQuestion < quizData.length) {
-        showQuestion();
-    } else {
-        showResult();
-    }
-}
-
-function showResult() {
-    document.getElementById("quiz-content").style.display = "none";
-    document.getElementById("quiz-result").style.display = "block";
-    document.getElementById("result-text").innerText = `Hebat! Kamu berhasil menjawab ${score} dari ${quizData.length} pertanyaan dengan benar.`;
-}
