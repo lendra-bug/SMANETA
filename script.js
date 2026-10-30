@@ -1,3 +1,4 @@
+```javascript
 // 1. Data Budaya Nusantara Terstruktur (Komplit)
 const dataNusantara = {
     sumatra: {
@@ -19,7 +20,7 @@ const dataNusantara = {
         tag: "Bali, Lombok, NTT",
         image: "https://unsplash.com",
         desc: "Bali memikat dunia internasional dengan integrasi harmonis antara adat istiadat, ritual spiritualitas Hindu, dan ekspresi seni murni. Fenomena ikonik seperti Tari Kecak mengeksplorasi harmoni suara puluhan pria tanpa instrumen musik konvensional, menceritakan kisah epos Ramayana berlatar eksotisme alam nusantara.",
-        fact: "Tari Kecak diciptakan pada tahun 1930-an oleh penari Bali Wayan Limbak bersama pelukis asal Jerman bernama Walter Spies berdasarkan ritual adat Sanghyang."
+        fact: "Tari Kecak diciptakan pada tahun 1930-an oleh penari Bali Wayan Limbak bersama pelukis asal Jerman berwarna Walter Spies berdasarkan ritual adat Sanghyang."
     },
     kalimantan: {
         title: "Kebudayaan Kalimantan",
@@ -81,7 +82,7 @@ window.addEventListener("scroll", () => {
     let current = "";
     sections.forEach((section) => {
         const sectionTop = section.offsetTop;
-        if (pageYOffset >= sectionTop - 150) {
+        if (window.pageYOffset >= sectionTop - 150) {
             current = section.getAttribute("id");
         }
     });
@@ -208,5 +209,3 @@ function showResult() {
     document.getElementById("quiz-result").style.display = "block";
     document.getElementById("result-text").innerText = `Hebat! Kamu berhasil menjawab ${score} dari ${quizData.length} pertanyaan dengan benar.`;
 }
-
-function resetQuiz() {
