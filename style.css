@@ -1,185 +1,524 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jelajah Nusantara - Ragam Budaya Interaktif</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Google Fonts -->
-    <link href="https://googleapis.com" rel="stylesheet">
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cloudflare.com">
-</head>
-<body>
+/* Global Configuration & Typography */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
 
-    <!-- Audio Instrumen Tradisional (Backsound Efek Kreatif) -->
-    <audio id="bgMusic" loop>
-        <source src="https://soundhelix.com" type="audio/mpeg">
-    </audio>
+:root {
+    --primary: #e67e22;
+    --primary-dark: #d35400;
+    --dark: #1a1a24;
+    --light-bg: #f8fafc;
+    --text-dark: #2d3748;
+    --text-muted: #718096;
+    --white: #ffffff;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
 
-    <!-- Floating Audio Control -->
-    <div class="audio-control" id="audioBtn">
-        <i class="fas fa-volume-mute"></i>
-    </div>
+html {
+    scroll-behavior: smooth;
+}
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="logo">Jelajah<span>Nusantara</span></div>
-        <ul class="nav-links">
-            <li><a href="#beranda" class="nav-link active">Beranda</a></li>
-            <li><a href="#eksplorasi" class="nav-link">Eksplorasi</a></li>
-            <li><a href="#kuis" class="nav-link">Kuis Budaya</a></li>
-        </ul>
-    </nav>
+body {
+    background-color: var(--light-bg);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
 
-    <!-- Hero Section -->
-    <section id="beranda" class="hero">
-        <div class="hero-overlay"></div>
-        <div class="hero-content">
-            <span class="badge animated-element">✨ Karya Inovasi Digital</span>
-            <h1 class="animated-element">Menyusuri Pesona<br>Budaya Indonesia</h1>
-            <p class="animated-element">Rasakan pengalaman interaktif menjelajahi warisan adat, seni, dan tradisi luhur dari berbagai penjuru nusantara secara modern.</p>
-            <div class="hero-btns animated-element">
-                <a href="#eksplorasi" class="btn btn-primary">Mulai Penjelajahan <i class="fas fa-compass"></i></a>
-                <a href="#kuis" class="btn btn-secondary">Uji Info Budaya <i class="fas fa-gamepad"></i></a>
-            </div>
-        </div>
-        <div class="scroll-indicator">
-            <div class="mouse"></div>
-            <span>Scroll Kebawah</span>
-        </div>
-    </section>
+/* Container Spacing */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
 
-    <!-- Exploration Section -->
-    <section id="eksplorasi" class="section">
-        <div class="container">
-            <div class="section-header">
-                <h2>Galeri Eksplorasi Budaya</h2>
-                <p>Temukan keunikan dan karakteristik khas kebudayaan dari kepulauan besar di Indonesia.</p>
-            </div>
-            
-            <div class="grid-container">
-                <!-- Card 1 -->
-                <div class="card animated-card" data-region="sumatra">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Sumatra</span>
-                        <h3>Rumah Gadang & Tari Piring</h3>
-                        <p>Simbol kemegahan arsitektur Minangkabau dan harmonisasi gerak estetis.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <!-- Card 2 -->
-                <div class="card animated-card" data-region="jawa">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Jawa</span>
-                        <h3>Wayang Kulit & Borobudur</h3>
-                        <p>Karya seni adiluhung sarat filosofi mendalam peninggalan peradaban besar.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <!-- Card 3 -->
-                <div class="card animated-card" data-region="bali">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Bali & NTB/NTT</span>
-                        <h3>Tari Kecak & Suku Sasak</h3>
-                        <p>Eksotisme ritual magis berpadu dengan keteguhan adat istiadat yang mendunia.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <!-- Card 4 -->
-                <div class="card animated-card" data-region="kalimantan">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Kalimantan</span>
-                        <h3>Rumah Betang & Tari Enggang</h3>
-                        <p>Representasi kehidupan komunal Dayak yang hidup berdampingan erat dengan alam.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <!-- Card 5 -->
-                <div class="card animated-card" data-region="sulawesi">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Sulawesi</span>
-                        <h3>Tongkonan & Upacara Rambu Solo'</h3>
-                        <p>Refleksi penghormatan mendalam terhadap leluhur masyarakat Tana Toraja.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-                <!-- Card 6 -->
-                <div class="card animated-card" data-region="papua">
-                    <div class="card-image" style="background-image: url('https://unsplash.com');"></div>
-                    <div class="card-body">
-                        <span class="card-tag">Maluku & Papua</span>
-                        <h3>Rumah Honai & Tari Tifa</h3>
-                        <p>Simbol kebersamaan, semangat juang, dan keaslian tradisi ujung timur nusantara.</p>
-                        <span class="read-more">Pelajari Selengkapnya <i class="fas fa-arrow-right"></i></span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+.container-narrow {
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
 
-    <!-- Quiz Section (Fitur Interaktif Tambahan Penilaian Juri) -->
-    <section id="kuis" class="section section-dark">
-        <div class="container container-narrow">
-            <div class="section-header text-center">
-                <h2>Kuis Wawasan Nusantara</h2>
-                <p>Uji sejauh mana pemahamanmu mengenai kekayaan tradisi tanah air melalui gim interaktif ini!</p>
-            </div>
-            
-            <div class="quiz-box" id="quizBox">
-                <div id="quiz-intro">
-                    <h3>Apakah kamu siap menerima tantangan?</h3>
-                    <p>Selesaikan 3 pertanyaan cepat dan buktikan kamu adalah pelestari budaya sejati.</p>
-                    <button class="btn btn-primary" onclick="startQuiz()">Mulai Kuis Sekarang</button>
-                </div>
-                <div id="quiz-content" style="display: none;">
-                    <div class="quiz-progress"><span id="q-num">1</span> dari 3 Pertanyaan</div>
-                    <h3 id="q-text">Pertanyaan akan muncul disini</h3>
-                    <div class="quiz-options" id="q-options">
-                        <!-- Pilihan tombol dimasukkan via JS -->
-                    </div>
-                </div>
-                <div id="quiz-result" style="display: none;">
-                    <h3>Hasil Evaluasi Kuis</h3>
-                    <p id="result-text">Skor kamu akan muncul di sini.</p>
-                    <button class="btn btn-secondary" onclick="resetQuiz()">Coba Lagi</button>
-                </div>
-            </div>
-        </div>
-    </section>
+.section {
+    padding: 100px 0;
+}
 
-    <!-- Footer -->
-    <footer>
-        <p>&copy; 2026 Jelajah Nusantara. Dikembangkan penuh integritas untuk Kompetisi Desain & Inovasi Web.</p>
-    </footer>
+.section-dark {
+    background-color: #111119;
+    color: var(--white);
+}
 
-    <!-- Details Modal -->
-    <div class="modal" id="detailsModal">
-        <div class="modal-backdrop"></div>
-        <div class="modal-wrapper">
-            <div class="modal-close" id="closeModalBtn">&times;</div>
-            <div class="modal-hero-img" id="modalImg"></div>
-            <div class="modal-body-content">
-                <span class="modal-meta-tag" id="modalTag">Kategori</span>
-                <h2 id="modalTitle">Judul Budaya</h2>
-                <p id="modalDescription">Deskripsi lengkap kebudayaan wilayah terkait.</p>
-                <div class="fun-fact-box">
-                    <strong>💡 Fakta Menarik:</strong>
-                    <p id="modalFact">Fakta unik kebudayaan daerah.</p>
-                </div>
-            </div>
-        </div>
-    </div>
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
 
-    <!-- GSAP Core CDN -->
-    <script src="https://cloudflare.com"></script>
-    <!-- ScrollTrigger CDN (Untuk Animasi Saat Scroll Guna Memikat Juri) -->
-    <script src="https://cloudflare.com"></script>
-    <script src="script.js"></script>
-</body>
-</html>
+.section-header h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: inherit;
+    letter-spacing: -0.5px;
+}
+
+.section-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-dark .section-header p {
+    color: #a0aec0;
+}
+
+/* Floating Audio Control */
+.audio-control {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50px;
+    background-color: var(--primary);
+    color: var(--white);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 10px 25px rgba(230, 126, 34, 0.4);
+    z-index: 999;
+    transition: var(--transition);
+}
+
+.audio-control:hover {
+    transform: scale(1.1);
+    background-color: var(--primary-dark);
+}
+
+/* Premium Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 8%;
+    position: absolute;
+    width: 100%;
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--white);
+    letter-spacing: -0.5px;
+}
+
+.navbar .logo span {
+    color: var(--primary);
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+.nav-links a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: var(--transition);
+    position: relative;
+    padding: 6px 0;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+}
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}
+
+.nav-links a:hover::after, .nav-links a.active::after {
+    width: 100%;
+}
+
+/* Hero Section Style */
+.hero {
+    height: 100vh;
+    position: relative;
+    background: url('https://unsplash.com') no-repeat center center/cover;
+    display: flex;
+    align-items: center;
+    padding: 0 8%;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(rgba(17, 17, 25, 0.5), rgba(17, 17, 25, 0.85));
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 650px;
+    color: var(--white);
+}
+
+.badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    backdrop-filter: blur(5px);
+}
+
+.hero-content h1 {
+    font-size: 3.8rem;
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 20px;
+    letter-spacing: -1px;
+}
+
+.hero-content p {
+    font-size: 1.15rem;
+    color: #cbd5e0;
+    margin-bottom: 36px;
+}
+
+.hero-btns {
+    display: flex;
+    gap: 16px;
+}
+
+/* Buttons System */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 32px;
+    border-radius: 30px;
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 1rem;
+    transition: var(--transition);
+    cursor: pointer;
+    border: none;
+}
+
+.btn-primary {
+    background-color: var(--primary);
+    color: var(--white);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(230, 126, 34, 0.3);
+}
+
+.btn-secondary {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--white);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.btn-secondary:hover {
+    background-color: var(--white);
+    color: var(--dark);
+    transform: translateY(-2px);
+}
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.85rem;
+}
+
+.mouse {
+    width: 24px;
+    height: 40px;
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    border-radius: 12px;
+    position: relative;
+}
+
+.mouse::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 8px;
+    background-color: var(--primary);
+    border-radius: 2px;
+    animation: scrollMouse 1.5s infinite;
+}
+
+@keyframes scrollMouse {
+    0% { opacity: 1; top: 8px; }
+    100% { opacity: 0; top: 18px; }
+}
+
+/* Modern Card Grid layout */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+    border: 1px solid #edf2f7;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 30px rgba(0,0,0,0.08);
+}
+
+.card-image {
+    height: 240px;
+    background-size: cover;
+    background-position: center;
+    transition: var(--transition);
+}
+
+.card:hover .card-image {
+    transform: scale(1.03);
+}
+
+.card-body {
+    padding: 24px;
+}
+
+.card-tag {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+}
+
+.card-body h3 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+}
+
+.card-body p {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-bottom: 18px;
+}
+
+.read-more {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+/* Gamified Quiz Section */
+.quiz-box {
+    background: #1a1a26;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+}
+
+.quiz-box h3 {
+    font-size: 1.6rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.quiz-progress {
+    font-size: 0.85rem;
+    color: var(--primary);
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.quiz-opt-btn {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 16px;
+    border-radius: 12px;
+    color: var(--white);
+    text-align: left;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.quiz-opt-btn:hover {
+    background: rgba(230, 126, 34, 0.15);
+    border-color: var(--primary);
+}
+
+/* Footer Section */
+footer {
+    background-color: #0b0b10;
+    color: #718096;
+    padding: 40px 24px;
+    text-align: center;
+    font-size: 0.9rem;
+    border-top: 1px solid #1a1a24;
+}
+
+/* Custom Interactive Modal Framework */
+.modal {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 10000;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.modal-backdrop {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background-color: rgba(11, 11, 16, 0.7);
+    backdrop-filter: blur(8px);
+}
+
+.modal-wrapper {
+    position: relative;
+    background-color: var(--white);
+    width: 100%;
+    max-width: 650px;
+    border-radius: 24px;
+    overflow: hidden;
+    z-index: 2;
+    box-shadow: 0 30px 60px rgba(0,0,0,0.25);
+}
+
+.modal-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    font-size: 2rem;
+    color: var(--white);
+    cursor: pointer;
+    z-index: 5;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    transition: var(--transition);
+}
+
+.modal-close:hover {
+    transform: scale(1.1);
+}
+
+.modal-hero-img {
+    height: 280px;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+}
+
+.modal-hero-img::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; width: 100%; height: 60px;
+    background: linear-gradient(transparent, var(--white));
+}
+
+.modal-body-content {
+    padding: 32px;
+}
+
+.modal-meta-tag {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--primary);
+    text-transform: uppercase;
+    display: inline-block;
+    margin-bottom: 8px;
+}
+
+.modal-body-content h2 {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -0.5px;
+}
+
+.modal-body-content p {
+    color: #4a5568;
+    font-size: 1.05rem;
+    margin-bottom: 24px;
+}
+
+.fun-fact-box {
+    background-color: #f7fafc;
+    border-left: 4px solid var(--primary);
+    padding: 16px;
+    border-radius: 0 12px 12px 0;
+}
+
+.fun-fact-box strong {
+    color: var(--text-dark);
+    display: block;
+    margin-bottom: 4px;
+}
+
+.fun-fact-box p {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    margin-bottom: 0;
+}
+
+/* Responsive Breakdown Layout */
+@media (max-width: 768px) {
